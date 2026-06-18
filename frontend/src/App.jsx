@@ -30,7 +30,7 @@ function App() {
       const res = await axios.get(API_URL);
       setProducts(res.data);
     } catch (err) {
-      setError("Could not load products. Is the backend running?");
+      setError(`Could not load products from "${API_URL}". Is the backend running?`);
       console.error(err);
     }
   };
