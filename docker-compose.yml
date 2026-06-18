@@ -1,0 +1,30 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: inventory-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: ./backend
+    container_name: inventory-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/inventory
+      - PORT=5000
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./frontend
+    container_name: inventory-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:
