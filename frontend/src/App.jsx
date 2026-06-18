@@ -131,27 +131,7 @@ function App() {
     return () => window.removeEventListener("click", handleOutsideClick);
   }, []);
 
-  const getEmoji = (name, category) => {
-    const n = name.toLowerCase();
-    const c = category.toLowerCase();
-    if (n.includes("tomato")) return "🍅";
-    if (n.includes("chicken") || n.includes("thigh") || n.includes("meat")) return "🍗";
-    if (n.includes("egg")) return "🥚";
-    if (n.includes("pasta") || n.includes("noodle")) return "🍝";
-    if (n.includes("oil")) return "🍾";
-    if (n.includes("pepper")) return "🫑";
-    if (n.includes("mouse")) return "🖱️";
-    if (n.includes("chair")) return "🪑";
-    if (n.includes("notebook") || n.includes("book")) return "📓";
-    if (n.includes("cable") || n.includes("usb")) return "🔌";
-    if (n.includes("lamp") || n.includes("light")) return "💡";
-    
-    if (c.includes("food") || c.includes("grocery")) return "🍎";
-    if (c.includes("electronic")) return "💻";
-    if (c.includes("furniture")) return "🪑";
-    if (c.includes("stationery")) return "✏️";
-    return "📦";
-  };
+
 
   const getUnit = (name, category) => {
     const n = name.toLowerCase();
@@ -467,7 +447,6 @@ function App() {
                     <input type="checkbox" className="custom-checkbox" readOnly />
                   </th>
                   <th>Item Name</th>
-                  <th>Image</th>
                   <th>Quantity</th>
                   <th>Storage Location</th>
                   <th>Last Updated</th>
@@ -478,7 +457,7 @@ function App() {
               <tbody>
                 {filteredProducts.length === 0 ? (
                   <tr>
-                    <td colSpan="8" className="empty-row">No products found matching filters.</td>
+                    <td colSpan="7" className="empty-row">No products found matching filters.</td>
                   </tr>
                 ) : (
                   filteredProducts.map((p) => {
@@ -499,11 +478,7 @@ function App() {
                             <span className="p-sku">{p.sku}</span>
                           </div>
                         </td>
-                        <td>
-                          <div className="emoji-avatar">
-                            {getEmoji(p.name, p.category)}
-                          </div>
-                        </td>
+
                         <td>
                           <div className="quantity-cell">
                             <span className="quantity-val">{p.quantity} {getUnit(p.name, p.category)}</span>
@@ -702,7 +677,6 @@ function App() {
             
             <div className="details-body">
               <div className="details-header-info">
-                <div className="details-emoji">{getEmoji(selectedProductDetails.name, selectedProductDetails.category)}</div>
                 <div>
                   <h4>{selectedProductDetails.name}</h4>
                   <span className="details-sku">SKU: {selectedProductDetails.sku}</span>
